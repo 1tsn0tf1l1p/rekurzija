@@ -21,58 +21,51 @@ double rek(int n, int donji, int i, int brojac)
 
 double iterativno(int n)
 {
-
-    int temp = n;
-
     int donji = 2;
-
-    int pocetni;
-
-    if (n % 2 == 0)
-    {
-        pocetni = n / 2;
-    }
-    else
-    {
-        pocetni = n / 2 + 1;
-    }
-
-    double rez = 1.0 * pocetni / donji;
-
-    donji = donji + 2;
+    int prvi = n / 2 + 1, drugi = n / 2, flag;
+    double rez;
 
     if (n % 2 == 0)
     {
-        for (int i = 1; i < temp; i++)
-        {
-            if (i % 2 != 0)
-            {
-                rez = 1.0 * (pocetni + i) / donji + sqrt(rez);
-            }
-            else
-            {
-                rez = 1.0 * (pocetni - i) / donji + sqrt(rez);
-            }
-            donji = donji + 2;
-        }
-        return sqrt(rez);
+        rez = 1.0 * drugi / donji;
+        drugi--;
     }
     else
     {
-        for (int i = 1; i < temp; i++)
-        {
-            if (i % 2 != 0)
-            {
-                rez = 1.0 * (pocetni - i) / donji + sqrt(rez);
-            }
-            else
-            {
-                rez = 1.0 * (pocetni + i) / donji + sqrt(rez);
-            }
-            donji = donji + 2;
-        }
-        return sqrt(rez);
+        rez = 1.0 * prvi / donji;
+        prvi++;
     }
+
+    if (n % 2 == 0)
+    {
+        flag = 1;
+    }
+    else
+    {
+        flag = 0;
+    }
+
+    donji += 2;
+
+    for (int i = 2; i <= n; i++)
+    {
+        if (flag == 1)
+        {
+            rez = 1.0 * prvi / donji + sqrt(rez);
+            donji += 2;
+            prvi++;
+        }
+        else
+        {
+            rez = 1.0 * drugi / donji + sqrt(rez);
+            drugi--;
+            donji += 2;
+        }
+
+        flag = (flag + 1) % 2;
+    }
+
+    return sqrt(rez);
 }
 
 int main()
