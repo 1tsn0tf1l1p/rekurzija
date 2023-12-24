@@ -29,6 +29,38 @@ double rek(int n, int temp, int polovina, int i)
 
 double iterativno(int n)
 {
+    int temp = n;
+
+    int stepen = n;
+
+    int i = 1;
+
+    int donji = pow(stepen, 2);
+
+    double rez = 1.0 * n / donji;
+
+    n--;
+
+    for (int j = 0; j <= temp; j++)
+    {
+        printf("n=%d, i=%d, stepen=%d, rez=%lf\n", n, i, stepen, rez);
+        if (i < (temp / 2) - 1)
+        {
+            rez = 1.0 * n / donji + sqrt(rez);
+            i++;
+            n--;
+            stepen--;
+        }
+        else
+        {
+            rez = 1.0 * n / donji + sqrt(rez);
+            i++;
+            n++;
+            stepen--;
+        }
+    }
+
+    return sqrt(rez);
 }
 
 int main()
